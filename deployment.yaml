@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: miapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: miapp
+  template:
+    metadata:
+      labels:
+        app: miapp
+    spec:
+      containers:
+        - name: miapp-container
+          image: gustavobarrera/miapp-web:v1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
