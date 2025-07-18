@@ -18,3 +18,5 @@ Practica Bootcamp DevOps - Desafio 3
     <sub>kubectl apply -f miapp-full.yaml</sub>
 
 # Aclaración: Esta ejecución es posible mediante un pull a DockerHub de la imagen que previamente subida a la plataforma, dejo como backup el archivo Dockerfile que utiliza la imagen pública por cualquier falló.
+# Documento para la instalación y configuración de Minikube para la creación de un cluster de Kubernetes: 
+https://docs.google.com/document/d/14qgiJ3CBqk0qk5494DqK4yMQKxrEqEvgJNk-zxlEk24/edit?usp=sharing
