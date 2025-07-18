@@ -20,7 +20,7 @@ Practica Bootcamp DevOps - Desafio 3
 # Revisión de la aplicación:
 * Una vez levantado el deploy completo podremos revisar la aplicación:
 
-    <sub>http:\\ipclusterk8s:30005\</sub>
+    <sub>ipclusterk8s:30005</sub>
 
     
 
