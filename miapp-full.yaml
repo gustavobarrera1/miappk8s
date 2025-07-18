@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: miapp-d
+  labels:
+    app: miapp 
+    responsable: GustavoBarrera
+spec:
+  selector:
+    matchLabels:
+      app: miapp 
+      responsable: GustavoBarrera
+  revisionHistoryLimit: 15
+  replicas: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: miapp
+        responsable: GustavoBarrera
+    spec:
+      containers:
+        - name: miapp 
+          image: gustavobarrera/miapp-web:v60b1ae7 
+          ports:
+            - containerPort: 5000
+          volumeMounts:
+            - name: mi-volumen
+              mountPath: /app/instance/ # Ruta dentro del contenedor
+      volumes:
+        - name: mi-volumen
+          persistentVolumeClaim:
+            claimName: miapp-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: miapp-svc-1
+  labels:
+    app: miapp   
+spec:
+  selector:
+    app: miapp
+  ports:
+  - port: 5000
+    nodePort: 30005
+  type: NodePort
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: miapp-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: /data/miapp
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: miapp-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+
